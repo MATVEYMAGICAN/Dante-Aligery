@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Божественная комедия Данте Алигьери</title>
+    <style>
+        /* CSS стили */
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #DAA520;
+            --dark-color: #222;
+            --light-color: #f8f8f8;
+            --font-main: 'Times New Roman', serif;
+            --font-heading: 'Palatino Linotype', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Dante_Domenico_di_Michelino_Duomo_Florence.jpg/1200px-Dante_Domenico_di_Michelino_Duomo_Florence.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        nav {
+            background-color: var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            color: white;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: #555;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+
+        .image-card {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .image-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            padding: 1rem;
+            background-color: white;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: var(--light-color);
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--secondary-color);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--secondary-color);
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--secondary-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--secondary-color) transparent transparent;
+        }
+
+        .right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .options {
+            margin-left: 1.5rem;
+        }
+
+        .option {
+            margin-bottom: 0.5rem;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #6B0000;
+        }
+
+        .result {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::before {
+                left: 60px;
+                border: medium solid var(--secondary-color);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--secondary-color) transparent transparent;
+            }
+
+            .left::after, .right::after {
+                left: 18px;
+            }
+
+            .right {
+                left: 0%;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Божественная комедия</h1>
+    <div class="subtitle">Данте Алигьери: история создания и анализ</div>
+</header>
+
+<nav>
+    <div class="nav-container">
+        <a href="#" class="nav-link active" data-tab="home">Главная</a>
+        <a href="#" class="nav-link" data-tab="history">История создания</a>
+        <a href="#" class="nav-link" data-tab="structure">Структура</a>
+        <a href="#" class="nav-link" data-tab="hell">Ад</a>
+        <a href="#" class="nav-link" data-tab="purgatory">Чистилище</a>
+        <a href="#" class="nav-link" data-tab="paradise">Рай</a>
+        <a href="#" class="nav-link" data-tab="gallery">Галерея</a>
+        <a href="#" class="nav-link" data-tab="quiz">Тест</a>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Главная вкладка -->
+    <div id="home" class="tab-content active">
+        <h2>Добро пожаловать!</h2>
+        <p>Этот сайт посвящён одному из величайших произведений мировой литературы - "Божественной комедии" Данте
+            Алигьери. Здесь вы найдёте подробный анализ поэмы, её историю создания, символику и многое другое.</p>
+
+        <div class="quote">
+            "Земную жизнь пройдя до половины,<br>
+            Я очутился в сумрачном лесу,<br>
+            Утратив правый путь во тьме долины."
+        </div>
+
+        <p>"Божественная комедия" - это эпическая поэма, написанная Данте Алигьери в период с 1308 по 1321 год. Она
+            описывает путешествие автора через Ад, Чистилище и Рай, представляя собой аллегорию человеческой души в
+            поисках Бога.</p>
+
+        <h3>Основные разделы сайта:</h3>
+        <ul>
+            <li><strong>История создания</strong> - биография Данте и обстоятельства написания поэмы</li>
+            <li><strong>Структура</strong> - анализ композиции и стиля произведения</li>
+            <li><strong>Ад, Чистилище, Рай</strong> - подробный разбор каждой части</li>
+            <li><strong>Галерея</strong> - иллюстрации к поэме разных художников</li>
+            <li><strong>Тест</strong> - проверьте свои знания о "Божественной комедии"</li>
+        </ul>
+
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Dante_by_Sandro_Botticelli.jpg/800px-Dante_by_Sandro_Botticelli.jpg"
+                     alt="Данте Алигьери">
+                <div class="image-caption">Данте Алигьери. Портрет работы Сандро Боттичелли</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Gustave_Doré_-_Inferno_-_Plate_9_%28Canto_III_-_The_Inscription_Over_the_Gate%29.jpg/800px-Gustave_Doré_-_Inferno_-_Plate_9_%28Canto_III_-_The_Inscription_Over_the_Gate%29.jpg"
+                     alt="Ад Данте">
+                <div class="image-caption">"Оставьте надежду, всяк сюда входящий". Иллюстрация Гюстава Доре</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- История создания -->
+    <div id="history" class="tab-content">
+        <h2>История создания "Божественной комедии"</h2>
+
+        <h3>Жизнь Данте и предпосылки написания</h3>
+        <p>Данте Алигьери (1265–1321) - итальянский поэт, философ, богослов и политический деятель. Его изгнание из
+            Флоренции в 1302 году стало ключевым событием, повлиявшим на создание "Божественной комедии".</p>
+
+        <p>На поэму оказали влияние:</p>
+        <ul>
+            <li>Античная литература (особенно "Энеида" Вергилия)</li>
+            <li>Христианская теология (Фома Аквинский)</li>
+            <li>Личная драма (любовь к Беатриче Портинари)</li>
+            <li>Политические события во Флоренции</li>
+        </ul>
+
+        <h3>Хронология создания</h3>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>1265</h3>
+                    <p>Рождение Данте Алигьери во Флоренции</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>1285</h3>
+                    <p>Женитьба на Джемме Донати, но истинная любовь - Беатриче Портинари</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>1290</h3>
+                    <p>Смерть Беатриче - ключевое событие в жизни Данте</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>1302</h3>
+                    <p>Изгнание из Флоренции по политическим причинам</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>1308</h3>
+                    <p>Начало работы над "Божественной комедией"</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>1321</h3>
+                    <p>Завершение поэмы и смерть Данте в Равенне</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Название произведения</h3>
+        <p>Сам Данте назвал свою поэму просто "Комедия", следуя средневековым представлениям о жанрах:</p>
+        <ul>
+            <li><strong>Трагедия</strong> - начинается хорошо, заканчивается плохо</li>
+            <li><strong>Комедия</strong> - начинается плохо, заканчивается хорошо</li>
+        </ul>
+        <p>Эпитет "Божественная" был добавлен позже Джованни Боккаччо в знак восхищения произведением.</p>
+
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/DanteAlighieri.jpg/800px-DanteAlighieri.jpg"
+                     alt="Данте">
+                <div class="image-caption">Традиционный портрет Данте</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Florence_-_Basilica_of_Santa_Croce_-_Dante%27s_tomb_%28empty%29.jpg/800px-Florence_-_Basilica_of_Santa_Croce_-_Dante%27s_tomb_%28empty%29.jpg"
+                     alt="Гробница Данте">
+                <div class="image-caption">Гробница Данте во Флоренции (символическая, так как он похоронен в Равенне)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Структура -->
+    <div id="structure" class="tab-content">
+        <h2>Структура и особенности поэмы</h2>
+
+        <h3>Жанр и стиль</h3>
+        <p>"Божественная комедия" сочетает в себе несколько жанров:</p>
+        <ul>
+            <li><strong>Эпическая поэма</strong> - масштабное повествование о путешествии</li>
+            <li><strong>Видение</strong> - популярный в Средние века жанр описания загробного мира</li>
+            <li><strong>Аллегория</strong> - каждый элемент имеет символическое значение</li>
+        </ul>
+
+        <h3>Композиция</h3>
+        <p>Поэма состоит из трёх частей (кантик):</p>
+        <ol>
+            <li><strong>Ад</strong> - 34 песни (первая - вводная)</li>
+            <li><strong>Чистилище</strong> - 33 песни</li>
+            <li><strong>Рай</strong> - 33 песни</li>
+        </ol>
+        <p>Всего 100 песен, что символизирует совершенство (10 - число совершенства в квадрате).</p>
+
+        <h3>Стихотворная форма</h3>
+        <p>Поэма написана <strong>терцинами</strong> - строфами из трёх строк со схемой рифмовки ABA BCB CDC и т.д.
+            Такой стих называется terza rima.</p>
+
+        <h3>Символика чисел</h3>
+        <p>В поэме важную роль играет числовая символика:</p>
+        <ul>
+            <li><strong>3</strong> - Святая Троица, три части поэмы</li>
+            <li><strong>9</strong> - 3×3, круги Ада, небеса Рая</li>
+            <li><strong>7</strong> - смертные грехи, уровни Чистилища</li>
+            <li><strong>100</strong> - совершенство (10×10)</li>
+        </ul>
+
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/La_Divina_Commedia.jpg/800px-La_Divina_Commedia.jpg"
+                     alt="Рукопись">
+                <div class="image-caption">Страница из ранней рукописи "Божественной комедии"</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Dante_comedy.jpg/800px-Dante_comedy.jpg"
+                     alt="Структура">
+                <div class="image-caption">Схематическое изображение структуры поэмы</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ад -->
+    <div id="hell" class="tab-content">
+        <h2>Ад</h2>
+        <p>Первая часть "Божественной комедии" описывает нисхождение Данте через девять кругов Ада, каждый из которых
+            предназначен для определённого типа грешников.</p>
+
+        <h3>Структура Ада</h3>
+        <p>Ад представляет собой воронкообразную пропасть, состоящую из концентрических кругов:</p>
+
+        <ol>
+            <li><strong>Лимб</strong> - некрещёные добродетельные люди и нехристианские философы</li>
+            <li><strong>Похоть</strong> - сладострастники</li>
+            <li><strong>Чревоугодие</strong> - обжоры</li>
+            <li><strong>Скупость и расточительство</strong></li>
+            <li><strong>Гнев и уныние</strong></li>
+            <li><strong>Ересь</strong></li>
+            <li><strong>Насилие</strong> (подразделяется на три пояса)</li>
+            <li><strong>Обман</strong> (десять рвов)</li>
+            <li><strong>Предательство</strong> (четыре пояса)</li>
+        </ol>
+
+        <div class="quote">
+            "Над входом в Ад начертано:<br>
+            'Оставьте надежду, всяк сюда входящий'"
+        </div>
+
+        <h3>Ключевые персонажи Ада</h3>
+        <ul>
+            <li><strong>Вергилий</strong> - проводник Данте, символ разума</li>
+            <li><strong>Харон</strong> - перевозчик душ через реку Ахерон</li>
+            <li><strong>Минос</strong> - судья душ, распределяющий грешников по кругам</li>
+            <li><strong>Паоло и Франческа</strong> - влюблённые, наказанные за прелюбодеяние</li>
+            <li><strong>Улисс (Одиссей)</strong> - наказан за обман</li>
+            <li><strong>Люцифер</strong> - владыка Ада, жующий трёх самых страшных предателей</li>
+        </ul>
+
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Gustave_Doré_-_Inferno_-_Plate_54_%28Canto_XXXIV_-_Lucifer%29.jpg/800px-Gustave_Doré_-_Inferno_-_Plate_54_%28Canto_XXXIV_-_Lucifer%29.jpg"
+                     alt="Люцифер">
+                <div class="image-caption">Люцифер. Иллюстрация Гюстава Доре</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Gustave_Doré_-_Inferno_-_Plate_10_%28Canto_III_-_Charon%29.jpg/800px-Gustave_Doré_-_Inferno_-_Plate_10_%28Canto_III_-_Charon%29.jpg"
+                     alt="Харон">
+                <div class="image-caption">Харон перевозит души. Иллюстрация Гюстава Доре</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gustave_Doré_-_Inferno_-_Plate_5_%28Canto_I_-_Dante%27s_meeting_with_Virgil%29.jpg/800px-Gustave_Doré_-_Inferno_-_Plate_5_%28Canto_I_-_Dante%27s_meeting_with_Virgil%29.jpg"
+                     alt="Данте и Вергилий">
+                <div class="image-caption">Данте встречает Вергилия. Иллюстрация Гюстава Доре</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Чистилище -->
+    <div id="purgatory" class="tab-content">
+        <h2>Чистилище</h2>
+        <p>Вторая часть поэмы описывает восхождение Данте по горе Чистилища, где души очищаются от семи смертных
+            грехов.</p>
+
+        <h3>Структура Чистилища</h3>
+        <p>Чистилище - это высокая гора, образующаяся из земли, вытесненной при создании Ада. Она состоит из:</p>
+        <ul>
+            <li><strong>Предчистилища</strong> (подножие горы)</li>
+            <li><strong>Семи террас</strong> (соответствуют семи смертным грехам)</li>
+            <li><strong>Земного Рая</strong> (на вершине)</li>
+        </ul>
+
+        <h3>Семь террас Чистилища</h3>
+        <ol>
+            <li><strong>Гордыня</strong> - души несут тяжёлые камни, сгибаясь под их тяжестью</li>
+            <li><strong>Зависть</strong> - глаза грешников сшиты железной проволокой</li>
+            <li><strong>Гнев</strong> - души бредут в густом чёрном дыму</li>
+            <li><strong>Уныние</strong> - бесконечный бег</li>
+            <li><strong>Скупость и расточительство</strong> - лежат лицом вниз, связанные</li>
+            <li><strong>Чревоугодие</strong> - измождённые голодом и жаждой</li>
+            <li><strong>Похоть</strong> - проходят сквозь стену огня</li>
+        </ol>
+
+        <h3>Ключевые события</h3>
+        <ul>
+            <li>Встреча с Катоном Утическим, стражем Чистилища</li>
+            <li>Вергилий постепенно теряет роль проводника</li>
+            <li>Встреча с Беатриче в Земном Раю</li>
+            <li>Символическое очищение Данте в реке Лете</li>
+        </ul>
+
+        <div class="quote">
+            "Чистилище - это место надежды,<br>
+            где души страдают, но знают,<br>
+            что однажды обретут спасение"
+        </div>
+
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Gustave_Doré_-_Purgatorio_-_Plate_11_%28Canto_II_-_The_Angel_Pilot%29.jpg/800px-Gustave_Doré_-_Purgatorio_-_Plate_11_%28Canto_II_-_The_Angel_Pilot%29.jpg"
+                     alt="Чистилище">
+                <div class="image-caption">Прибытие в Чистилище. Иллюстрация Гюстава Доре</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Gustave_Doré_-_Purgatorio_-_Plate_50_%28Canto_XXX_-_Beatrice_appears_to_Dante%29.jpg/800px-Gustave_Doré_-_Purgatorio_-_Plate_50_%28Canto_XXX_-_Beatrice_appears_to_Dante%29.jpg"
+                     alt="Беатриче">
+                <div class="image-caption">Появление Беатриче. Иллюстрация Гюстава Доре</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Рай -->
+    <div id="paradise" class="tab-content">
+        <h2>Рай</h2>
+        <p>Третья и заключительная часть поэмы описывает восхождение Данте через девять небес Рая к созерцанию
+            Божественной сущности.</p>
+
+        <h3>Структура Рая</h3>
+        <p>Рай Данте основан на птолемеевской системе мира и состоит из:</p>
+        <ol>
+            <li><strong>Луна</strong> - души, не выполнившие обеты</li>
+            <li><strong>Меркурий</strong> - деятельные добродетели</li>
+            <li><strong>Венера</strong> - любящие</li>
+            <li><strong>Солнце</strong> - мудрецы и богословы</li>
+            <li><strong>Марс</strong> - воины за веру</li>
+            <li><strong>Юпитер</strong> - справедливые правители</li>
+            <li><strong>Сатурн</strong> - созерцатели</li>
+            <li><strong>Звёздное небо</strong> - триумф Христа и Девы Марии</li>
+            <li><strong>Перводвигатель</strong> - ангельские чины</li>
+            <li><strong>Эмпирей</strong> - созерцание Бога</li>
+        </ol>
+
+        <h3>Ключевые персонажи Рая</h3>
+        <ul>
+            <li><strong>Беатриче</strong> - проводник Данте в Раю, символ божественной любви</li>
+            <li><strong>Святой Бернард</strong> - сопровождает Данте в последней части пути</li>
+            <li><strong>Апостолы, святые, богословы</strong> - населяют различные сферы Рая</li>
+        </ul>
+
+        <div class="quote">
+            "Любовь, что движет солнце и светила"<br>
+            (Последняя строка "Божественной комедии")
+        </div>
+
+        <h3>Финал поэмы</h3>
+        <p>В финале Данте созерцает Божественный свет, который предстаёт перед ним в виде трёх кругов, символизирующих
+            Троицу. Это момент высшего духовного прозрения, который невозможно полностью выразить словами.</p>
+
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Gustave_Doré_-_Paradiso_-_Plate_82_%28Canto_XXXI_-_The_Empyrean%29.jpg/800px-Gustave_Doré_-_Paradiso_-_Plate_82_%28Canto_XXXI_-_The_Empyrean%29.jpg"
+                     alt="Рай">
+                <div class="image-caption">Райская роза. Иллюстрация Гюстава Доре</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Gustave_Doré_-_Paradiso_-_Plate_84_%28Canto_XXXIII_-_The_Vision_of_God%29.jpg/800px-Gustave_Doré_-_Paradiso_-_Plate_84_%28Canto_XXXIII_-_The_Vision_of_God%29.jpg"
+                     alt="Бог">
+                <div class="image-caption">Созерцание Бога. Иллюстрация Гюстава Доре</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Галерея -->
+    <div id="gallery" class="tab-content">
+        <h2>Галерея изображений</h2>
+        <p>Иллюстрации к "Божественной комедии" создавались многими художниками на протяжении веков. Здесь представлены
+            некоторые из самых известных работ.</p>
+
+        <h3>Иллюстрации Гюстава Доре (XIX век)</h3>
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Gustave_Doré_-_Inferno_-_Plate_9_%28Canto_III_-_The_Inscription_Over_the_Gate%29.jpg/800px-Gustave_Doré_-_Inferno_-_Plate_9_%28Canto_III_-_The_Inscription_Over_the_Gate%29.jpg"
+                     alt="Врата Ада">
+                <div class="image-caption">"Оставьте надежду, всяк сюда входящий"</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Gustave_Doré_-_Inferno_-_Plate_54_%28Canto_XXXIV_-_Lucifer%29.jpg/800px-Gustave_Doré_-_Inferno_-_Plate_54_%28Canto_XXXIV_-_Lucifer%29.jpg"
+                     alt="Люцифер">
+                <div class="image-caption">Люцифер в центре Ада</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gustave_Doré_-_Inferno_-_Plate_5_%28Canto_I_-_Dante%27s_meeting_with_Virgil%29.jpg/800px-Gustave_Doré_-_Inferno_-_Plate_5_%28Canto_I_-_Dante%27s_meeting_with_Virgil%29.jpg"
+                     alt="Данте и Вергилий">
+                <div class="image-caption">Данте встречает Вергилия</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Gustave_Doré_-_Purgatorio_-_Plate_11_%28Canto_II_-_The_Angel_Pilot%29.jpg/800px-Gustave_Doré_-_Purgatorio_-_Plate_11_%28Canto_II_-_The_Angel_Pilot%29.jpg"
+                     alt="Чистилище">
+                <div class="image-caption">Прибытие в Чистилище</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Gustave_Doré_-_Purgatorio_-_Plate_50_%28Canto_XXX_-_Beatrice_appears_to_Dante%29.jpg/800px-Gustave_Doré_-_Purgatorio_-_Plate_50_%28Canto_XXX_-_Beatrice_appears_to_Dante%29.jpg"
+                     alt="Беатриче">
+                <div class="image-caption">Появление Беатриче</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Gustave_Doré_-_Paradiso_-_Plate_82_%28Canto_XXXI_-_The_Empyrean%29.jpg/800px-Gustave_Doré_-_Paradiso_-_Plate_82_%28Canto_XXXI_-_The_Empyrean%29.jpg"
+                     alt="Рай">
+                <div class="image-caption">Райская роза</div>
+            </div>
+        </div>
+
+        <h3>Другие художники</h3>
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Dante_Domenico_di_Michelino_Duomo_Florence.jpg/800px-Dante_Domenico_di_Michelino_Duomo_Florence.jpg"
+                     alt="Микелино">
+                <div class="image-caption">Данте с "Божественной комедией". Доменико ди Микелино (1465)</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Sandro_Botticelli_-_La_Carte_de_l%27Enfer.jpg/800px-Sandro_Botticelli_-_La_Carte_de_l%27Enfer.jpg"
+                     alt="Боттичелли">
+                <div class="image-caption">Карта Ада. Сандро Боттичелли (1480-е)</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/William_Blake_-_Dante_and_Virgil_Approaching_the_Angel_Guarding_the_Entrance_to_Purgatory_-_Google_Art_Project.jpg/800px-William_Blake_-_Dante_and_Virgil_Approaching_the_Angel_Guarding_the_Entrance_to_Purgatory_-_Google_Art_Project.jpg"
+                     alt="Блейк">
+                <div class="image-caption">Данте и Вергилий. Уильям Блейк (1824-27)</div>
+            </div>
+            <div class="image-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Salvador_Dali%2C_Dante%27s_Divine_Comedy%2C_The_Angel%2C_1960.jpg/800px-Salvador_Dali%2C_Dante%27s_Divine_Comedy%2C_The_Angel%2C_1960.jpg"
+                     alt="Дали">
+                <div class="image-caption">Ангел. Сальвадор Дали (1960)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Тест -->
+    <div id="quiz" class="tab-content">
+        <h2>Тест на знание "Божественной комедии"</h2>
+        <p>Проверьте свои знания о великой поэме Данте!</p>
+
+        <div class="quiz-container">
+            <div class="question" id="q1">
+                <p>1. Сколько всего частей (кантик) в "Божественной комедии"?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1a" value="a">
+                        <label for="q1a">2</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1b" value="b">
+                        <label for="q1b">3</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1c" value="c">
+                        <label for="q1c">4</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" id="q2">
+                <p>2. Кто является проводником Данте по Аду и Чистилищу?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2a" value="a">
+                        <label for="q2a">Беатриче</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2b" value="b">
+                        <label for="q2b">Вергилий</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2c" value="c">
+                        <label for="q2c">Святой Бернард</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" id="q3">
+                <p>3. Сколько кругов в Аду?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3a" value="a">
+                        <label for="q3a">7</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3b" value="b">
+                        <label for="q3b">9</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3c" value="c">
+                        <label for="q3c">12</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" id="q4">
+                <p>4. Какое наказание несут грешники во втором круге Ада (похоть)?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4a" value="a">
+                        <label for="q4a">Их крутит ураган</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4b" value="b">
+                        <label for="q4b">Они лежат в грязи</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4c" value="c">
+                        <label for="q4c">Они горят в огне</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" id="q5">
+                <p>5. Кто сопровождает Данте в Раю?</p>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5a" value="a">
+                        <label for="q5a">Вергилий</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5b" value="b">
+                        <label for="q5b">Беатриче</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5c" value="c">
+                        <label for="q5c">Святой Пётр</label>
+                    </div>
+                </div>
+            </div>
+
+            <button id="submit-quiz">Проверить ответы</button>
+            <div class="result" id="quiz-result"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2023 Сайт о "Божественной комедии" Данте Алигьери</p>
+    <p>Все изображения используются в образовательных целях</p>
+</footer>
+
+<script>
+    // JavaScript для работы сайта
+    document.addEventListener('DOMContentLoaded', function () {
+        // Переключение между вкладками
+        const navLinks = document.querySelectorAll('.nav-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Удаляем активный класс у всех ссылок и вкладок
+                navLinks.forEach(l => l.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+
+                // Добавляем активный класс к текущей ссылке
+                this.classList.add('active');
+
+                // Показываем соответствующую вкладку
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Проверка теста
+        const quizSubmit = document.getElementById('submit-quiz');
+        const quizResult = document.getElementById('quiz-result');
+
+        const correctAnswers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'b',
+            q4: 'a',
+            q5: 'b'
+        };
+
+        quizSubmit.addEventListener('click', function () {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+
+                if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                    score++;
+                }
+            }
+
+            const percentage = Math.round((score / totalQuestions) * 100);
+            let message = '';
+
+            if (percentage >= 80) {
+                message = `Превосходно! Вы набрали ${score} из ${totalQuestions} (${percentage}%). Вы настоящий знаток "Божественной комедии"!`;
+            } else if (percentage >= 50) {
+                message = `Хорошо! Вы набрали ${score} из ${totalQuestions} (${percentage}%). Вы неплохо знаете поэму.`;
+            } else {
+                message = `Вы набрали ${score} из ${totalQuestions} (${percentage}%). Возможно, стоит перечитать "Божественную комедию" ещё раз.`;
+            }
+
+            quizResult.textContent = message;
+        });
+    });
+</script>
+</body>
+</html>
